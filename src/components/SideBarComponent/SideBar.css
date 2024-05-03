@@ -1,0 +1,125 @@
+.sidebar {
+  height: 100%;
+  background-color: var(--sidebar-background-color);
+  color: var(--sidebar-text-color);
+  position: fixed;
+  box-shadow: 25px 0 20px -20px rgba(0, 0, 0, 0.45);
+}
+
+.side-header-container{
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--sidebar-header-background-color);
+  color: var(--sidebar-header-text-color);
+}
+
+.side-slides{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* For SideBarHeader */
+
+.profile-pic{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-pic img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.profile-container{
+  height: 100%;
+  width: 70%;
+  display: flex;
+  padding: 10px 0 0 10px;
+  flex-direction: column;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.profile-contents{
+  padding: 15px 15px 0 0px;
+}
+.profile-contents .username{
+  font-size: 16px;
+  font-weight: bold;
+  max-width: 150px;
+}
+.profile-contents .profile-status {
+  font-size: 12px;
+  font-weight: 400;
+  max-width: 150px;
+}
+.no-margin{
+  margin: 0;
+  width: fit-content;
+}
+.text-wrap{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profile-btns{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+.prof-btns{
+  margin: 0 10px 10px 0;
+}
+.more-vert{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+/* SideBar Slides */
+.slide-profile-pic{
+  height: 100%;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide-profile-pic img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.slide-container{
+  height: 50px;
+  display: flex;
+  width: 100%;
+  padding: 0 5px;
+}
+.slide-contents{
+  padding: 5px;
+  width: 100%;
+}
+.slide-contents .username {
+  font-size: 13px;
+  font-weight: bold;
+  max-width: 180px;
+}
+.slide-contents .message {
+  max-width: 180px;
+  font-size: 11px;
+  font-weight: 400;
+}
+.msg-time .time {
+  font-size: 8px;
+  font-weight: 400;
+  float: right;
+}
+.line {
+  border-top: 1px solid var(--sidebar-line-color);
+  width: -webkit-fill-available;
+  margin: 0px 5px;
+}

@@ -1,3 +1,45 @@
+:root {
+  --color-primary: #5e2db3;
+  --color-secondary: #7344bc;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  --color-light: #f8f9fa;
+  --color-dark: #343a40;
+  --text-color: #212529;
+  --sidebar-text-color: #f8f9fa;
+  --sidebar-background-color: #212529;
+  --sidebar-header-background-color: #343a40;
+  --sidebar-header-text-color: #f8f9fa;
+  --sidebar-line-color: #6c757d;
+  --message-seen-color: #78aad3;
+  --message-not-seen-color: #6c757d;
+  --color-white: #fff;
+  --color-send-btn: #28a745;
+}
+
+[data-theme='dark'] {
+  --color-primary: #1b1620;
+  --color-secondary: #302b35;
+  --color-success: #198754;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #0dcaf0;
+  --color-light: #f8f9fa;
+  --color-dark: #212529;
+  --sidebar-text-color: #f8f9fa;
+  --sidebar-background-color: #f8f9fa;
+  --sidebar-header-background-color: #212529;
+  --sidebar-header-text-color: #f8f9fa;
+  --sidebar-line-color: #6c757d;
+  --message-seen-color: #78aad3;
+  --message-not-seen-color: #6c757d;
+  --color-white: #fff;
+  --color-send-btn: #28a745;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
