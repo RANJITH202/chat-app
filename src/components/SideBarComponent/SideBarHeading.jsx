@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import './SideBar.css';
+import appContext from '../../Context';
+import { localStorageKey, resposeStatus } from '../../service/constants';
+import makeToast from '../../Toastr';
 
 const SideBarHeading = ({profilePic, username, profileStatus}) => {
-  const [isDarkMode, setDarkMode] = useState(false);
+  const {isDarkMode, setDarkMode, setIsLogin,} = useContext(appContext);
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
+  }
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem(localStorageKey.TOKEN);
+    setIsLogin(false);
+    makeToast(resposeStatus.SUCCESS, 'Logged out Successfully');
   }
 
   return (
@@ -29,7 +39,7 @@ const SideBarHeading = ({profilePic, username, profileStatus}) => {
           onChange={toggleDarkMode}
           size={20}
           />
-          <LogoutIcon className='prof-btns'/>
+          <LogoutIcon onClick={handleLogout} className='prof-btns'/>
         </div>
         
       </div>

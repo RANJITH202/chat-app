@@ -3,7 +3,6 @@ import ChatHeader from './ChatHeader';
 import ChatText from './ChatText';
 import './ChatBox.css';
 import '../../App.css';
-import TextBox from './TextBox';
 
 const ChatBox = () => {
   return (
