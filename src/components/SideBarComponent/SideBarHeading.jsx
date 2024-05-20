@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -39,7 +39,7 @@ const SideBarHeading = ({profilePic, username, profileStatus}) => {
           onChange={toggleDarkMode}
           size={20}
           />
-          <LogoutIcon onClick={handleLogout} className='prof-btns'/>
+          <LogoutIcon  className='prof-btns' onClick={handleLogout}/>
         </div>
         
       </div>

@@ -6,7 +6,7 @@ import { getUsers, login } from '../../service/API';
 import Register from './Register';
 import appContext from '../../Context';
 
-const LoginPage = () => {
+const LoginPage = ({setupSocket}) => {
   const { setIsLogin } = useContext(appContext);
   const [isRegister, setIsRegister] = useState(false); 
   const usernameRef = useRef();
@@ -26,6 +26,7 @@ const LoginPage = () => {
     if (loginRes.data.info === resposeStatus.SUCCESS) {
       localStorage.setItem(localStorageKey.TOKEN, loginRes.data.token);
       setIsLogin(true);
+      setupSocket();
       makeToast(resposeStatus.SUCCESS, 'Login Successful');
     } else {
       makeToast(resposeStatus.ERROR, 'Login Unsuccessful');

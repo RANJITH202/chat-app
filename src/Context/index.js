@@ -7,6 +7,8 @@ const appState = {
   setUserId: () => {},
   isDarkMode: false, 
   setDarkMode: () => {},
+  socket: null, 
+  setSocket: () => {},
 }
 
 export const appContext = createContext(appState);
