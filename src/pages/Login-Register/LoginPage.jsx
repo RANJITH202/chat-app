@@ -7,27 +7,36 @@ import Register from './Register';
 import appContext from '../../Context';
 
 const LoginPage = ({setupSocket}) => {
-  const { setIsLogin } = useContext(appContext);
-  const [isRegister, setIsRegister] = useState(false); 
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const { setIsLogin, setUserId } = useContext(appContext);
+  const [isRegister, setIsRegister] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
-    if(usernameRef.current.value === '' || passwordRef.current.value === '') 
+    if(username === '' || password === '') 
       return makeToast(resposeStatus.ERROR, 'Please fill all the fields');
     const data = {
-      emailId: usernameRef.current.value,
-      password: passwordRef.current.value
+      emailId: username,
+      password: password
     };
     const loginRes = await login(data);
-    usernameRef.current.value = '';
-    passwordRef.current.value = '';
+    setUsername('');
+    setPassword('');
     if (loginRes.data.info === resposeStatus.SUCCESS) {
       localStorage.setItem(localStorageKey.TOKEN, loginRes.data.token);
       setIsLogin(true);
-      setupSocket();
+      setUserId(loginRes.data.userId);
       makeToast(resposeStatus.SUCCESS, 'Login Successful');
+      setTimeout(() => {
+        setupSocket();
+      }, 1000);
     } else {
       makeToast(resposeStatus.ERROR, 'Login Unsuccessful');
     }
@@ -47,10 +56,10 @@ const LoginPage = ({setupSocket}) => {
         <h1>Login</h1>
         <form className='login-form'>
           <div className='textbox'> 
-            <input type='text' placeholder='Username' name='username' ref={usernameRef}/>
+            <input type='text' placeholder='Username' name='username' value={username} onChange={handleUsernameChange}/>
           </div>
           <div className='textbox'>
-            <input type='password' placeholder='Password' name='password' ref={passwordRef} />
+            <input type='password' placeholder='Password' name='password' value={password} onChange={handlePasswordChange} />
           </div>
           <button type='submit' onClick={handleLogin} className='login-button'>Login</button>
           <button className='register-btn' onClick={handleRegister}>Register / New User</button>

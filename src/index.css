@@ -53,3 +53,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+* {
+  scroll-behavior: smooth;
+  /* box-sizing: border-box;
+  margin: 0;
+  padding: 0; */
+}

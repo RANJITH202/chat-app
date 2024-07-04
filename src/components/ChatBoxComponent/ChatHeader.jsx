@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './ChatBox.css';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import CallIcon from '@mui/icons-material/Call';
+import appContext from '../../Context';
 
-const ChatHeader = ({ profilePic = 'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350', username='New Users', profileStatus='New Status' }) => {
+const ChatHeader = () => {
+  const { participantsDetails } = useContext(appContext);
   return (
     <div className='chat-header'>
       <div className="slide-container">
       <div className="slide-profile-pic">
-        <img src={profilePic} alt="Profile Pic" />
+        <img src={participantsDetails?.profilePic} alt="Profile Pic" />
       </div>
       <div className="slide-contents">
         <div className="user-msg">
-          <p className="username no-margin text-wrap">{username}</p>
-          <p className="message no-margin text-wrap">{profileStatus}</p>
+          <p className="username no-margin text-wrap">{`${participantsDetails?.firstName} ${participantsDetails?.lastName}`}</p>
+          <p className="message no-margin text-wrap">{participantsDetails?.profileStatus}</p>
         </div>
         <div className="chat-header-opt">
           <CallIcon className='chat-call'/>

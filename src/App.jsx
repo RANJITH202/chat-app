@@ -4,24 +4,25 @@ import Main from './pages/Main/Main';
 import LoginPage from './pages/Login-Register/LoginPage';
 import appContext from './Context';
 import { localStorageKey, resposeStatus } from './service/constants';
-import { io } from 'socket.io-client';
+import io from 'socket.io-client';
 import makeToast from './Toastr';
+import jwtDecode from 'jwt-decode';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState('');
   const [isDarkMode, setDarkMode] = useState(false);
   const [socket, setSocket] = useState(null);
+  const [participantsDetails, setParticipantsDetails] = useState({});
 
   const setupSocket = () => {
     const token = localStorage.getItem(localStorageKey.TOKEN);
     if(token && !socket) {
-      const newSocket = io('http://localhost:3000', {
-        data: {
-          token: localStorage.getItem(localStorageKey.TOKEN),
-        }
+      const newSocket = io("http://localhost:3001", {
+        query: {
+          token,
+        },
       });
-
       newSocket.on('disconnect', () => {
         setSocket(null);
         setTimeout(setupSocket, 3000);
@@ -31,13 +32,32 @@ function App() {
       newSocket.on('connect', () => {
         makeToast(resposeStatus.SUCCESS, "Socket Connected!");
       });
-
       setSocket(newSocket);
     }
   }
-
+  const checkLogin = () => {
+    const token = localStorage.getItem(localStorageKey.TOKEN);
+    if(token) {
+      const decodedToken = jwtDecode(token);
+      setUserId(decodedToken.id);
+      setIsLogin(true);
+    }
+  }
   useEffect(() => {
+    checkLogin();
     setupSocket();
+    // Function to clear local storage
+    const clearLocalStorage = () => {
+      localStorage.clear();
+    };
+
+    // Add event listener for beforeunload  
+    window.addEventListener('beforeunload', clearLocalStorage);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('beforeunload', clearLocalStorage);
+    };
   }, []);
 
   const contextItems = {
@@ -49,6 +69,8 @@ function App() {
     setDarkMode,
     socket, 
     setSocket,
+    participantsDetails, 
+    setParticipantsDetails,
   };
 
   return (

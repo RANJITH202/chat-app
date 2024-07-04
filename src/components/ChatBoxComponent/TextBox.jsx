@@ -12,27 +12,22 @@ const TextBox = ({sendMessage}) => {
   const handleChange = (event) => {
     setInputMessage(event.target.value);
   };
+  const onEnterPress = (e) => {
+    if(e.key === 'Enter') {
+      handleClick();
+    }
+  }
   const handleClick = () => {
     setInputMessage("");
-    const current = new Date();
-    const formattedTime = current.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
     sendMessage({
-      id: Math.random(),
       message: inputMessage,
-      time: formattedTime,
-      status: "received",
-      user: "me",
     });
   };
   return (
     <div className="text-box-con">
       <div className="chat-footer">
         <MoodIcon className="emoji-btn"/>
-        <textarea value={inputMessage} onChange={handleChange} placeholder="Type a message"></textarea>
+        <textarea value={inputMessage} onChange={handleChange} placeholder="Type a message" onKeyDown={onEnterPress}></textarea>
         <div className="icons">
           <AttachFileIcon className="file-attach-btn" />
           <CameraAltIcon className="camera-btn"/>

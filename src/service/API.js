@@ -14,7 +14,6 @@ const loginApi = axios.create({
     } catch (error) {
       makeToast(resposeStatus.ERROR, 'Error logging in');
       console.error('Error logging in: ', error);
-      throw error;
     }
   }
   
@@ -25,6 +24,45 @@ const loginApi = axios.create({
     } catch (error) {
       makeToast(resposeStatus.ERROR, 'Error Registration');
       console.error('Error Registration: ', error);
-      throw error;
     }
   }
+  export const getUserByID = async (id) => {
+    try {
+      const response = await api.get(`${API_URLS.GET_USER_BY_ID}/?id=${id}`);
+      return response;
+    } catch (error) {
+      makeToast(resposeStatus.ERROR, 'Error Registration');
+      console.error('Error Registration: ', error);
+    }
+  }
+
+  // Message API
+  export const getSideMessages = async (id) => {
+    try{
+      const response = await api.get(`${API_URLS.GET_SIDEBAR_MESSAGES}/?id=${id}`);
+      return response;
+    } catch (error) {
+      makeToast(resposeStatus.ERROR, 'Error fetching messages');
+      console.error('Error fetching messages: ', error);
+    }
+  };
+
+  export const addMessages = async (data) => {
+    try{
+      const response = await api.post(`${API_URLS.ADD_MESSAGES}`, data);
+      return response;
+    } catch (error) {
+      makeToast(resposeStatus.ERROR, 'Error while Adding messages');
+      console.error('Error while Adding messages: ', error);
+    }
+  };
+
+  export const getMessagesByUsers = async (userId, participantId) => {
+    try{
+      const response = await api.get(`${API_URLS.GET_MESSAGES_BY_USERS}/?userId=${userId}&receiverId=${participantId}`);
+      return response;
+    } catch (error) {
+      makeToast(resposeStatus.ERROR, 'Error fetching messages');
+      console.error('Error fetching messages: ', error);
+    }
+  };

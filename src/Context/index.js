@@ -9,6 +9,8 @@ const appState = {
   setDarkMode: () => {},
   socket: null, 
   setSocket: () => {},
+  participantsDetails: {}, 
+  setParticipantsDetails: () => {},
 }
 
 export const appContext = createContext(appState);

@@ -7,10 +7,9 @@
 }
 
 .text-box-con{
-  position: absolute;
-  bottom: 20px;
-  left: 45%;
-  transform: translateX(-50%);
+  width: calc(100% - 255px);
+  display: flex;
+  justify-content: center;
 }
 
 /* Chat Header */
@@ -36,11 +35,11 @@
 
 /* Chat Text Container */
 .chat-text-container{
-  height: calc(100% - 60px);
+  height: calc(100% - 130px);
   width:  calc(100% - 255px);
 	padding-left: 10px;
 	overflow-y: scroll;
-	flex: 1;
+  margin-top: 10px;
 }
 
 .chat-right {
@@ -70,7 +69,10 @@
 	word-break: break-all;
 	font-size: 14px;
 }
-.check svg{
+.check-time {
+  transition: all 0.2s linear;
+}
+.check-time svg{
   position: relative;
   bottom: -5px;
   padding-left: 5px;
@@ -106,6 +108,7 @@
 	border-radius: 60px;
 	position: relative;
 	cursor: pointer;
+  width: 40%;
 }
 .chat-footer textarea {
 	display: block;
@@ -157,4 +160,15 @@
 }
 .chat-footer .send-mic .send-btn {
   right: 7px;
+}
+
+@media (min-width: 720px) {
+  .chat-footer {
+    width: 40%;
+  }
+}
+@media (min-width: 576px) {
+  .chat-footer {
+    width: 70%;
+  }
 }

@@ -1,39 +1,52 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SideBarHeading from './SideBarHeading'
 import SideSlides from './SideSlides';
 import './SideBar.css';
+import { resposeStatus } from '../../service/constants';
+import { getUserByID, getSideMessages } from '../../service/API';
+import appContext from '../../Context';
+import makeToast from '../../Toastr';
 
 const SideBar = () => {
-  const profile = {
-    profilePic: 'https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350',
-    username: 'Ranjith',
-    profileStatus: 'Why do we fall? So we can learn to pick ourselves up.'
+  const { userId, setParticipantsDetails } = useContext(appContext);
+  const [userDetails, setUserDetails] = useState({});
+  const [lastMsgList, setLastMsgList] = useState([]);
+  const getUserDetails = async () => {  
+    const user = await getUserByID(userId);
+    if (user.data.info === resposeStatus.SUCCESS) {
+      setUserDetails(user.data.user);
+    } else {
+      makeToast(resposeStatus.ERROR, "Error fetching user details");
+    }
+  }
+
+  const getSideBarMessages = async () => {
+    const messages = await getSideMessages(userId);
+    if (messages.data.info === resposeStatus.SUCCESS) {
+      if(messages?.data?.messages?.length > 0) {
+        setLastMsgList(messages.data.messages);
+        setParticipantsDetails(messages.data.messages[0].userDetails[0]);
+      } else {
+        makeToast(resposeStatus.ERROR, "No messages found");
+      }
+    } else {
+      makeToast(resposeStatus.ERROR, "Error fetching messages");
+    }
   };
-  const slides = [{
-    id: 1,
-    username: 'John Doe',
-    lastMsg: 'Slide 1 lastMsg',
-    lastMsgTime: '10:00 PM'
-  }, {
-    id: 2,
-    username: 'Sithik',
-    lastMsg: 'Slide 2 lastMsg',
-    lastMsgTime: '11:00 PM'
-  }, {
-    id: 3,
-    username: 'Slide 3',
-    lastMsg: 'Slide 3 Content',
-    lastMsgTime: '05:00 AM'
-  }];
+
+  useEffect(() => {
+    getUserDetails();
+    getSideBarMessages();
+  },[]);
 
   return (
     <div className='sidebar'>
       <div className='side-header-container'>
-        <SideBarHeading profilePic={profile.profilePic} profileStatus={profile.profileStatus} username={profile.username} />
+        <SideBarHeading profilePic={userDetails.profilePic} profileStatus={userDetails.profileStatus} firstName={userDetails.firstName} lastName={userDetails.lastName} />
       </div>
       <div className="side-slides">
-        {slides.map(slide => (
-          <SideSlides key={slide.id} profilePic={profile.profilePic} username={slide.username} lastMsg={slide.lastMsg} lastMsgTime={slide.lastMsgTime} />
+        {lastMsgList.map(slide => (
+          <SideSlides key={slide._id} profilePic={slide.userDetails.profilePic} username={`${slide.userDetails[0].firstName} ${slide.userDetails[0].lastName}`} lastMsg={slide.message} lastMsgTime={slide.createdAt} userDetails={slide.userDetails[0]}/>
         ))}
       </div>
     </div>
