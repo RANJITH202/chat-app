@@ -3,9 +3,8 @@ import './App.css';
 import Main from './pages/Main/Main';
 import LoginPage from './pages/Login-Register/LoginPage';
 import appContext from './Context';
-import { localStorageKey, resposeStatus } from './service/constants';
+import { localStorageKey } from './service/constants';
 import io from 'socket.io-client';
-import makeToast from './Toastr';
 import jwtDecode from 'jwt-decode';
 
 function App() {
@@ -22,15 +21,6 @@ function App() {
         query: {
           token,
         },
-      });
-      newSocket.on('disconnect', () => {
-        setSocket(null);
-        setTimeout(setupSocket, 3000);
-        makeToast(resposeStatus.ERROR, "Socket Disconnected!");
-      });
-
-      newSocket.on('connect', () => {
-        makeToast(resposeStatus.SUCCESS, "Socket Connected!");
       });
       setSocket(newSocket);
     }

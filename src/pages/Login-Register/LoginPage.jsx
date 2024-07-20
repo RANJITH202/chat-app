@@ -29,7 +29,7 @@ const LoginPage = ({setupSocket}) => {
     const loginRes = await login(data);
     setUsername('');
     setPassword('');
-    if (loginRes.data.info === resposeStatus.SUCCESS) {
+    if (loginRes?.data?.info === resposeStatus.SUCCESS) {
       localStorage.setItem(localStorageKey.TOKEN, loginRes.data.token);
       setIsLogin(true);
       setUserId(loginRes.data.userId);
