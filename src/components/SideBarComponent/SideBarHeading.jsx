@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./SideBar.css";
 import appContext from "../../Context";
-import { localStorageKey, resposeStatus } from "../../service/constants";
+import { localStorageKey, responseStatus } from "../../service/constants";
 import makeToast from "../../Toastr";
 import { Tooltip } from "@mui/material";
 
@@ -20,12 +20,12 @@ const SideBarHeading = ({profilePic, firstName, lastName, profileStatus}) => {
     e.preventDefault();
     localStorage.removeItem(localStorageKey.TOKEN);
     setIsLogin(false);
-    makeToast(resposeStatus.SUCCESS, "Logged out Successfully");
+    makeToast(responseStatus.SUCCESS, "Logged out Successfully");
     setTimeout(() => {
       if(socket) {
         socket.disconnect();
         setSocket(null);
-        makeToast(resposeStatus.ERROR, "Socket Disconnected!");
+        makeToast(responseStatus.ERROR, "Socket Disconnected!");
       }
     }, 1000);
   };

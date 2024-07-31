@@ -11,7 +11,7 @@ export const API_URLS = {
 
 }
 
-export const resposeStatus = {
+export const responseStatus = {
     SUCCESS: 'success',
     FAILURE: 'failure',
     ERROR: 'error',

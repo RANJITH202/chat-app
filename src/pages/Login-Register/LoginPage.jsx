@@ -1,8 +1,8 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Login-Register.css'
-import { localStorageKey, resposeStatus } from '../../service/constants';
+import { localStorageKey, responseStatus } from '../../service/constants';
 import makeToast from '../../Toastr';
-import { getUsers, login } from '../../service/API';
+import { login } from '../../service/API';
 import Register from './Register';
 import appContext from '../../Context';
 
@@ -21,7 +21,7 @@ const LoginPage = ({setupSocket}) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if(username === '' || password === '') 
-      return makeToast(resposeStatus.ERROR, 'Please fill all the fields');
+      return makeToast(responseStatus.ERROR, 'Please fill all the fields');
     const data = {
       emailId: username,
       password: password
@@ -29,21 +29,21 @@ const LoginPage = ({setupSocket}) => {
     const loginRes = await login(data);
     setUsername('');
     setPassword('');
-    if (loginRes?.data?.info === resposeStatus.SUCCESS) {
+    if (loginRes?.data?.info === responseStatus.SUCCESS) {
       localStorage.setItem(localStorageKey.TOKEN, loginRes.data.token);
       setIsLogin(true);
       setUserId(loginRes.data.userId);
-      makeToast(resposeStatus.SUCCESS, 'Login Successful');
+      makeToast(responseStatus.SUCCESS, 'Login Successful');
       setTimeout(() => {
         setupSocket();
       }, 1000);
     } else {
-      makeToast(resposeStatus.ERROR, 'Login Unsuccessful');
+      makeToast(responseStatus.ERROR, 'Login Unsuccessful');
     }
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    makeToast(resposeStatus.ERROR, 'Will be released soon!');
+    makeToast(responseStatus.ERROR, 'Will be released soon!');
     // setIsRegister(true);
     // await getUsers();
   };

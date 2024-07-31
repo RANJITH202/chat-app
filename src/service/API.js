@@ -1,6 +1,6 @@
 import api from './axios-base';
 import axios from 'axios';
-import { API_URLS, BASE_URL, resposeStatus } from './constants';
+import { API_URLS, BASE_URL, responseStatus } from './constants';
 import makeToast from '../Toastr';
 
 const loginApi = axios.create({
@@ -12,7 +12,7 @@ const loginApi = axios.create({
       const response = await loginApi.post(API_URLS.LOGIN, data);
       return response;
     } catch (error) {
-      makeToast(resposeStatus.ERROR, 'Error logging in');
+      makeToast(responseStatus.ERROR, 'Error logging in');
       console.error('Error logging in: ', error);
     }
   }
@@ -22,7 +22,7 @@ const loginApi = axios.create({
       const response = await api.get(API_URLS.GET_ALL_USERS);
       return response;
     } catch (error) {
-      makeToast(resposeStatus.ERROR, 'Error Registration');
+      makeToast(responseStatus.ERROR, 'Error Registration');
       console.error('Error Registration: ', error);
     }
   }
@@ -31,7 +31,7 @@ const loginApi = axios.create({
       const response = await api.get(`${API_URLS.GET_USER_BY_ID}/?id=${id}`);
       return response;
     } catch (error) {
-      makeToast(resposeStatus.ERROR, 'Error Registration');
+      makeToast(responseStatus.ERROR, 'Error Registration');
       console.error('Error Registration: ', error);
     }
   }
@@ -42,7 +42,7 @@ const loginApi = axios.create({
       const response = await api.get(`${API_URLS.GET_SIDEBAR_MESSAGES}/?id=${id}`);
       return response;
     } catch (error) {
-      makeToast(resposeStatus.ERROR, 'Error fetching messages');
+      makeToast(responseStatus.ERROR, 'Error fetching messages');
       console.error('Error fetching messages: ', error);
     }
   };
@@ -52,7 +52,7 @@ const loginApi = axios.create({
       const response = await api.post(`${API_URLS.ADD_MESSAGES}`, data);
       return response;
     } catch (error) {
-      makeToast(resposeStatus.ERROR, 'Error while Adding messages');
+      makeToast(responseStatus.ERROR, 'Error while Adding messages');
       console.error('Error while Adding messages: ', error);
     }
   };
@@ -62,7 +62,7 @@ const loginApi = axios.create({
       const response = await api.get(`${API_URLS.GET_MESSAGES_BY_USERS}/?userId=${userId}&receiverId=${participantId}`);
       return response;
     } catch (error) {
-      makeToast(resposeStatus.ERROR, 'Error fetching messages');
+      makeToast(responseStatus.ERROR, 'Error fetching messages');
       console.error('Error fetching messages: ', error);
     }
   };

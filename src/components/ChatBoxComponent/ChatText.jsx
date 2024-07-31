@@ -6,7 +6,7 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import TextBox from "./TextBox";
 import appContext from "../../Context";
 import { getMessagesByUsers } from "../../service/API";
-import { resposeStatus } from "../../service/constants";
+import { responseStatus } from "../../service/constants";
 import makeToast from "../../Toastr";
 const moment = require("moment");
 
@@ -15,14 +15,14 @@ const ChatText = () => {
   const [messages, setMessages] = useState([]);
   const getMsg = async () => {
     const msg = await getMessagesByUsers(userId, participantsDetails._id);
-    if (msg?.data?.info === resposeStatus.SUCCESS) {
+    if (msg?.data?.info === responseStatus.SUCCESS) {
       if (msg?.data?.messages?.length > 0) {
         setMessages(msg.data.messages);
       } else {
-        makeToast(resposeStatus.ERROR, "No messages found");
+        makeToast(responseStatus.ERROR, "No messages found");
       }
     } else {
-      makeToast(resposeStatus.ERROR, "Error fetching messages");
+      makeToast(responseStatus.ERROR, "Error fetching messages");
     }
   };
   const sendMessage = ({ message }) => {

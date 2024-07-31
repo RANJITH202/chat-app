@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL, localStorageKey, resposeStatus } from './constants';
+import { BASE_URL, localStorageKey, responseStatus } from './constants';
 import makeToast from '../Toastr';
 
 const api =  axios.create({
@@ -25,8 +25,8 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Token Referesh have to be handled.
-    makeToast(resposeStatus.ERROR, 'Login Again to continue');
+    // Token Refresh have to be handled.
+    makeToast(responseStatus.ERROR, 'Login Again to continue');
     console.log("Interceptors Response error => ", error);
     return Promise.reject(error);
   }

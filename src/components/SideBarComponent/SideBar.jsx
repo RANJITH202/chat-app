@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import SideBarHeading from './SideBarHeading'
 import SideSlides from './SideSlides';
 import './SideBar.css';
-import { resposeStatus } from '../../service/constants';
+import { responseStatus } from '../../service/constants';
 import { getUserByID, getSideMessages } from '../../service/API';
 import appContext from '../../Context';
 import makeToast from '../../Toastr';
@@ -13,24 +13,24 @@ const SideBar = () => {
   const [lastMsgList, setLastMsgList] = useState([]);
   const getUserDetails = async () => {  
     const user = await getUserByID(userId);
-    if (user.data.info === resposeStatus.SUCCESS) {
+    if (user.data.info === responseStatus.SUCCESS) {
       setUserDetails(user.data.user);
     } else {
-      makeToast(resposeStatus.ERROR, "Error fetching user details");
+      makeToast(responseStatus.ERROR, "Error fetching user details");
     }
   }
 
   const getSideBarMessages = async () => {
     const messages = await getSideMessages(userId);
-    if (messages.data.info === resposeStatus.SUCCESS) {
+    if (messages.data.info === responseStatus.SUCCESS) {
       if(messages?.data?.messages?.length > 0) {
         setLastMsgList(messages.data.messages);
         setParticipantsDetails(messages.data.messages[0].userDetails[0]);
       } else {
-        makeToast(resposeStatus.ERROR, "No messages found");
+        makeToast(responseStatus.ERROR, "No messages found");
       }
     } else {
-      makeToast(resposeStatus.ERROR, "Error fetching messages");
+      makeToast(responseStatus.ERROR, "Error fetching messages");
     }
   };
 
