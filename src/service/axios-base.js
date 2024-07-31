@@ -9,7 +9,7 @@ const api =  axios.create({
 // Request interceptor for adding the bearer token
 api.interceptors.request.use(
   (config) => {
-    const token = sessionStorage.getItem(localStorageKey.TOKEN);
+    const token = localStorageKey.getItem(localStorageKey.TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
